@@ -1,0 +1,31 @@
+{
+  "TrainingJobName": "linear-regression-job",
+  "AlgorithmSpecification": {
+    "TrainingImage": "<ECR_IMAGE_URI>",
+    "TrainingInputMode": "File"
+  },
+  "RoleArn": "<SAGEMAKER_ROLE_ARN>",
+  "InputDataConfig": [
+    {
+      "ChannelName": "train",
+      "DataSource": {
+        "S3DataSource": {
+          "S3DataType": "S3Prefix",
+          "S3Uri": "s3://my-bucket/data/",
+          "S3DataDistributionType": "FullyReplicated"
+        }
+      }
+    }
+  ],
+  "OutputDataConfig": {
+    "S3OutputPath": "s3://my-bucket/output/"
+  },
+  "ResourceConfig": {
+    "InstanceType": "ml.m5.large",
+    "InstanceCount": 1,
+    "VolumeSizeInGB": 5
+  },
+  "StoppingCondition": {
+    "MaxRuntimeInSeconds": 3600
+  }
+}
